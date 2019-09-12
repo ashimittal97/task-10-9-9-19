@@ -50,48 +50,46 @@ public class BookDetailsServlet extends HttpServlet {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, Integer.parseInt(code));
 			ResultSet rs = ps.executeQuery();
-			int fakeprice=0;
-			int fakeprice2;
+			
 			out.println("<html>");
 			out.println("<html><body>");
 			out.println("<h3>Book-Details</h3>");
 			out.println("<hr>");
 			while(rs.next())
 			{
-				if(map.get(currentuser)>2 && map.get(currentuser)<=4 )
-				{
-					fakeprice=(rs.getInt(5));
-					fakeprice+=fakeprice*0.1;
-				out.println("<tr><td><center>"+rs.getInt(1)+"</center></td>"
-						+ "<td><center>"+rs.getString(2)+"</center></td>"
-								+ "<td><center>"+rs.getString(3)+"</center></td>"
-								+ "<td><center>"+rs.getString(4)+"</center></td>"
-								+ "<td><center>"+fakeprice+"</center></td>"
-								+ "</tr>");
-				}
-				if(map.get(currentuser)>4 )
-				{
-					fakeprice=(rs.getInt(5));
-					fakeprice2=(int)(fakeprice+fakeprice*0.2);
-				out.println("<tr><td><center>"+rs.getInt(1)+"</center></td>"
-						+ "<td><center>"+rs.getString(2)+"</center></td>"
-								+ "<td><center>"+rs.getString(3)+"</center></td>"
-								+ "<td><center>"+rs.getString(4)+"</center></td>"
-								+ "<td><center>"+fakeprice2+"</center></td>"
-								+ "</tr>");
-				}
-				if(map.get(currentuser)<=2)
-				{
-					out.println("<tr><td><center>"+rs.getInt(1)+"</center></td>"
-							+ "<td><center>"+rs.getString(2)+"</center></td>"
-									+ "<td><center>"+rs.getString(3)+"</center></td>"
-									+ "<td><center>"+rs.getString(4)+"</center></td>"
-									+ "<td><center>"+rs.getInt(5)+"</center></td>"
-									+ "</tr>");
-				}
-			out.println("</table>");
-			
+				int Book_id=Integer.parseInt(rs.getString(1));
+				String Book_Name=rs.getString(2);
+				String Subject=rs.getString(3);
+				String Edition=rs.getString(4);
+				int price=Integer.parseInt(rs.getString(5));
+				out.println("<table border=2 align='center'>");
+				out.println("<tr>");
+				out.println("<td>BCode</td>");
+				out.println("<td>"+Book_id+"</td>");
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<td>Title</td>");
+				out.println("<td>"+Book_Name+"</td>");
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<td>Subject</td>");
+				out.println("<td>"+Subject+"</td>");
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<td>Edition</td>");
+				out.println("<td>"+Edition+"</td>");
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<td>Price</td>");
+				out.println("<td>"+price+"</td>");
+				out.println("</tr>");
+				out.println("</table>");
 			}
+			out.println("<hr>");
+			out.println("<a href=CartManager?code="+code+">Add-To-Cart</a><br>");
+			out.println("<a href=SubjectPageServlet>Subject-Page</a><br>");
+			out.println("<a href=buyerpage.jsp>Buyer-Page</a><br>");
+			out.println("</body></html>");
 				}
 				
 				
