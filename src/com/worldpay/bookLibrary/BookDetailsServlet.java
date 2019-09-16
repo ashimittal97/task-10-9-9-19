@@ -42,7 +42,7 @@ public class BookDetailsServlet extends HttpServlet {
 		}
 		String code = request.getParameter("code");
 		PrintWriter out = response.getWriter();
-		
+		int Book_id=0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ashi", "root", "root");
@@ -57,7 +57,7 @@ public class BookDetailsServlet extends HttpServlet {
 			out.println("<hr>");
 			while(rs.next())
 			{
-				int Book_id=Integer.parseInt(rs.getString(1));
+				 Book_id=Integer.parseInt(rs.getString(1));
 				String Book_Name=rs.getString(2);
 				String Subject=rs.getString(3);
 				String Edition=rs.getString(4);
@@ -86,7 +86,7 @@ public class BookDetailsServlet extends HttpServlet {
 				out.println("</table>");
 			}
 			out.println("<hr>");
-			out.println("<a href=CartManager?code="+code+">Add-To-Cart</a><br>");
+			out.println("<a href=CartManager?code="+Book_id+">Add-To-Cart</a><br>");
 			out.println("<a href=SubjectPageServlet>Subject-Page</a><br>");
 			out.println("<a href=buyerpage.jsp>Buyer-Page</a><br>");
 			out.println("</body></html>");

@@ -56,7 +56,7 @@ while (rs1.next()) {
 <td><%=rs1.getString(3)%></td>
 <td><%=rs1.getString(4)%></td>
 <td><%=rs1.getString(5)%></td>
-<td><a href="CartManager">Add-Cart</td>
+<td><a href=CartManager?code="+<%=rs1.getString(1)%>+">Add-To-Cart</a><br></td>
 </tr>
 
 
